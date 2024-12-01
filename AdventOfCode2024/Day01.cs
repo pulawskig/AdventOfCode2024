@@ -1,8 +1,14 @@
-﻿namespace AdventOfCode2024;
+﻿using System.Buffers;
+using AdventOfCode2024.Tools;
+
+namespace AdventOfCode2024;
 
 public partial class Day01
 {
-    internal partial class Part1
+    public static readonly SearchValues<char> NumberSearchValues =
+        SearchValues.Create(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
+    
+    public partial class Part1
     {
         private readonly Example _example = new(
             """
@@ -29,18 +35,25 @@ public partial class Day01
             var left = new List<int>();
             var right = new List<int>();
 
-            var lines = input.Split(["\r\n", "\r", "\n"], StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
+            var span = input.AsSpan();
+
+            var numbers = FindNumbers(span);
+            for (var i = 0; i < numbers.Count; i++)
             {
-                var numbers = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-                left.Add(numbers[0]);
-                right.Add(numbers[1]);
+                if (i % 2 == 0)
+                {
+                    left.Add(numbers[i]);
+                }
+                else
+                {
+                    right.Add(numbers[i]);
+                }
             }
             
             return (left, right);
         }
     }
-    internal partial class Part2
+    public partial class Part2
     {
         private readonly Example _example = new(
             """
@@ -63,20 +76,20 @@ public partial class Day01
         {
             var left = new List<int>();
             var right = new Dictionary<int, int>();
+            
+            var span = input.AsSpan();
+            var numbers = FindNumbers(span);
 
-            var lines = input.Split(["\r\n", "\r", "\n"], StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
+            for (var i = 0; i < numbers.Count; i++)
             {
-                var numbers = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-                left.Add(numbers[0]);
-
-                if (right.ContainsKey(numbers[1]))
+                if (i % 2 == 0)
                 {
-                    right[numbers[1]]++;
+                    left.Add(numbers[i]);
                 }
                 else
                 {
-                    right.Add(numbers[1], 1);
+                    right.TryAdd(numbers[i], 0);
+                    right[numbers[i]]++;
                 }
             }
 
@@ -87,5 +100,32 @@ public partial class Day01
             
             return (left, right);
         }
+    }
+
+    public static List<int> FindNumbers(ReadOnlySpan<char> input)
+    {
+        var numbers = new List<int>();
+        
+        while (true)
+        {
+            var startIndex = input.IndexOfAny(NumberSearchValues);
+            if (startIndex == -1)
+            {
+                break;
+            }
+
+            input = input[startIndex..];
+            var endIndex = input.IndexOfAnyExcept(NumberSearchValues);
+            if (endIndex == -1)
+            {
+                numbers.AddFromSpan(input);
+                break;
+            }
+                
+            numbers.AddFromSpan(input[..endIndex]);
+            input = input[endIndex..];
+        }
+
+        return numbers;
     }
 }
