@@ -44,3 +44,4 @@ msbuild.err
 msbuild.wrn
 
 SESSION.COOKIE
+BenchmarkDotNet.Artifacts/
