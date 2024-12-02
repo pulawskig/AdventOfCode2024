@@ -1,4 +1,4 @@
-﻿using AdventOfCode2024.Benchmarks.Day01;
+﻿using AdventOfCode2024.Benchmarks;
 using BenchmarkDotNet.Running;
 
-BenchmarkRunner.Run<Day01>();
+BenchmarkRunner.Run<Day02>();

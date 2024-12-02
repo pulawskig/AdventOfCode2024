@@ -1,7 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 
-namespace AdventOfCode2024.Benchmarks.Day01;
+namespace AdventOfCode2024.Benchmarks;
 
 [SimpleJob(RuntimeMoniker.Net90)]
 [MemoryDiagnoser(false)]
