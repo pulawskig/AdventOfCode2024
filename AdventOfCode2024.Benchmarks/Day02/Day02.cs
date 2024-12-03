@@ -19,14 +19,11 @@ public class Day02
         
         part1 = new AdventOfCode2024.Day02.Part1();
         part2 = new AdventOfCode2024.Day02.Part2();
-        parse = part1.Parse(input);
+        parse = AdventOfCode2024.Day02.Parse(input);
     }
 
     [Benchmark]
-    public List<List<int>> Part1_Parse() => part1.Parse(input);
-
-    [Benchmark]
-    public List<List<int>> Part2_Parse() => part2.Parse(input);
+    public List<List<int>> Parse() => AdventOfCode2024.Day02.Parse(input);
 
     [Benchmark]
     public int Part1_Solve() => part1.Solve(parse);
