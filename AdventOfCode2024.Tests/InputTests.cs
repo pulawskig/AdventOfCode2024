@@ -15,5 +15,7 @@ public partial class InputTests
         yield return new(2, 2, "589");
         yield return new(3, 1, "178794710");
         yield return new(3, 2, "76729637");
+        yield return new(4, 1, "2639");
+        yield return new(4, 2, "2005");
     }
 }
