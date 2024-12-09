@@ -57,6 +57,9 @@
       <None Update="inputs\input08.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="inputs\input09.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
     <PropertyGroup>
         <AoCAgent_GenerateAgent>false</AoCAgent_GenerateAgent>
