@@ -1,4 +1,4 @@
 ﻿using AdventOfCode2024.Benchmarks;
 using BenchmarkDotNet.Running;
 
-BenchmarkRunner.Run<Day11>();
+BenchmarkRunner.Run<Day14>();
